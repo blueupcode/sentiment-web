@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <main>
+        <form method="POST" action="/analyze">
+            <input type="text" name="game_id" placeholder="Masukkan ID Package Play Store">
+            <button type="submit">Analisis</button>
+        </form>
+        {% if reviews %}
+            <form>
+                <h2>Hasil Sentimen</h2>
+                <img src="data:image/png;base64,{{ plot_url }}">
+                <table>
+                    <tr>
+                        <th>Ulasan</th>
+                        <th>Sentimen</th>
+                    </tr>
+                    {% for review in reviews %}
+                        <tr>
+                            <td>{{ review.content }}</td>
+                            <td>{{ review.sentiment }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        {% endif %}
+    </main>
+</body>
+</html>
